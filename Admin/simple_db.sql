@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2020 at 12:28 PM
+-- Generation Time: Mar 23, 2020 at 07:15 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -29,18 +29,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `id_admin` int(11) NOT NULL,
-  `username` varchar(20) DEFAULT NULL,
-  `password` varchar(20) DEFAULT NULL,
-  `tipe` varchar(10) DEFAULT NULL
+  `id_user` int(11) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id_admin`, `username`, `password`, `tipe`) VALUES
-(1, 'admin1', 'admin1', 'admin');
+INSERT INTO `admin` (`id_user`, `username`, `password`) VALUES
+(1, 'admin1', 'admin1');
 
 -- --------------------------------------------------------
 
@@ -68,9 +67,9 @@ CREATE TABLE `permintaanjemputsampah` (
 --
 
 INSERT INTO `permintaanjemputsampah` (`id`, `idUser`, `namaAcara`, `notelp`, `alamat`, `kecamatan`, `kelurahan`, `tanggal`, `waktu`, `perkiraanBeratSampah`, `fotoDokumen`, `Status`) VALUES
-(1, 0, 'Seminar', '082111222333', 'jl simpang remujung', 'lowokwaru', 'jatimulyo', '2020-03-16', '00:00:00', 3, 'plastikimg.jpg', ''),
-(2, 0, 'Seminar', '082777666555', 'jl remujung', 'lowokwaru', 'jatimulyo', '2020-03-16', '00:00:00', 5, 'sampahimg.jpg', ''),
-(3, 0, 'Seminar', '081444555666', 'jl sukarno hatta', 'lowokwaru', 'jatimulyo', '2020-03-16', '00:00:00', 2, 'kertasimg.jpg', '');
+(1, 0, 'Coba', '082111222333', 'jl simpang remujung', 'lowokwaru', 'jatimulyo', '2020-03-16', '00:00:00', 3, 'plastikimg.jpg', ''),
+(2, 0, 'Seminar', '082777666555', 'jl remujung', 'lowokwaru', 'jatimulyo', '2020-03-16', '00:00:00', 5, 'sampah.jpg', ''),
+(3, 0, 'Seminar', '081444555666', 'jl suhat', 'lowokwaru', 'jatimulyo', '2020-03-16', '00:00:00', 2, 'kertasimg.jpg', '');
 
 -- --------------------------------------------------------
 
@@ -182,7 +181,7 @@ INSERT INTO `user` (`id`, `unique_id`, `level`, `name`, `nohp`, `encrypted_imei`
 -- Indexes for table `admin`
 --
 ALTER TABLE `admin`
-  ADD PRIMARY KEY (`id_admin`);
+  ADD PRIMARY KEY (`id_user`);
 
 --
 -- Indexes for table `permintaanjemputsampah`
@@ -226,7 +225,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `permintaanjemputsampah`
