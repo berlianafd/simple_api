@@ -119,16 +119,19 @@ class DB_Functions {
             $salt = $user['salt'];
             $encrypted_imei = $user['encrypted_imei'];
             $hash = $this->checkhashSSHA($salt, $imei);
+            
+            return $user;
+            
             // check for imei equality
-            if ($encrypted_imei == $hash) {
-                // user authentication details are correct
-                return $user;
-            } else{
-                //jika nohp sama dan imei berbeda, maka mengeluarkan pertanyaan. jika ya imei akan diupdate. jika no tidak bisa masuk.
-             $response["error"] = TRUE;
-               $response["error_msg"] = "Perangkat berbeda. Yakin ingin meneruskan?"; //belum selesai
-               echo json_encode($response);
-           }
+           //  if ($encrypted_imei == $hash) {
+           //      // user authentication details are correct
+           //      return $user;
+           //  } else{
+           //      //jika nohp sama dan imei berbeda, maka mengeluarkan pertanyaan. jika ya imei akan diupdate. jika no tidak bisa masuk.
+           //   $response["error"] = TRUE;
+           //     $response["error_msg"] = "Perangkat berbeda. Yakin ingin meneruskan?"; //belum selesai
+           //     echo json_encode($response);
+           // }
        } else {
         return NULL;
     }
