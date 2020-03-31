@@ -1,15 +1,10 @@
 <?php
-$servername = "localhost";
-$username = "root";
+$host = "localhost";
+$user = "root";
 $password = "";
-$dbname = "simple_db";
+$db = "simple_db";
 
-// Create connection
-$mysqli = mysqli_connect($servername, $username, $password, $dbname); 
-if(mysqli_connect_errno()){
-    echo "Koneksi gagal, ada masalah pada: ".mysqli_connect_error();
-    exit();
-    mysqli_close($mysqli);
-}
+$koneksi = mysqli_connect($host, $user, $password) or die(mysqli_error());
+$db_select = mysqli_select_db($koneksi, $db) or die(mysqli_error($koneksi));
 
 ?>
