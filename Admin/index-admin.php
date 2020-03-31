@@ -1,315 +1,315 @@
 <?php
-if (!isset($_SESSION)) {
-    session_start();
-    ob_start();
-}
-
-@ini_set('output_buffering',0);
-set_time_limit(0);
-error_reporting(0);
-
-    if (!isset($_SESSION['password']) || !isset($_SESSION['username'])) {     
-        session_unset();
-        header("Location:login.php");
-        exit;
-    }
-
-require_once 'inc/koneksi.php'; 
+require_once 'koneksi.php';
 ?>
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <title>POLINEMA-Pay</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta charset="utf-8">
-  <meta name="keywords" content="Fast Service a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-  Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-  <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
-  <link href="css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
-  <link href="css/easy-responsive-tabs.css" rel='stylesheet' type='text/css'/>
-  <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="all">
-  <link rel="stylesheet" type="text/css" href="css/style_common.css" />
-  <link rel="stylesheet" type="text/css" href="css/style1.css" />
-  <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-  <link href="//fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
-  <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>POLINEMA-PAY</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <!-- https://fonts.google.com/specimen/Roboto -->
+    <link rel="stylesheet" href="css/fontawesome.min.css">
+    <!-- https://fontawesome.com/ -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="css/templatemo-style.css">
+    <!--
+	Product Admin CSS Template
+	https://templatemo.com/tm-524-product-admin
+-->
 </head>
-<body>
-  <header>
-   <!-- header -->
-   <?php
-   include"navbar-admin.php";
-   ?>
-   <!-- //header -->
 
-   <!-- banner -->
-   <!-- banner-slider -->
-   <div class="w3l_banner_info">
-    <div class="slider">
-     <div class="callbacks_container">
-      <ul class="rslides" id="slider3">
-       <li>
-        <div class="slider-img">
-         <div class="slider_banner_info">
-           <div class="text">
-            <h3 class="word wisteria">Sistem  Informasi dan Pembayaran  Elektronik  Bank  Sampah</h3>
-          </div>
-        </div>
-      </div>
-    </li>
-    <li>
-      <div class="slider-img-2">
-       <div class="slider_banner_info">
-        <div class="text">
-          <h3 class="word wisteria">Sistem Informasi dan Pembayaran Elektronik Bank Sampah</h3>
-        </div>
+<body id="reportsPage">
+    <div class="" id="home">
+        <nav class="navbar navbar-expand-xl">
+            <div class="container h-100">
+                <a class="navbar-brand" href="index-admin.php">
+                    <h1 class="tm-site-title mb-0">POLINEMA-PAY</h1>
+                </a>
+                <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars tm-nav-icon"></i>
+            </button>
 
-      </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto h-100">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <i class="fas fa-home"></i>
+                            Dashboard
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-users"></i>
+                        <span>
+                            User Mahasiswa <i class="fas fa-angle-down"></i>
+                        </span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="peninjaupesanan.php">Peninjau Pesanan</a>
+                        <a class="dropdown-item" href="hargasampah.php">Harga Sampah</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-store"></i>
+                    <span>
+                        Merchant<i class="fas fa-angle-down"></i>
+                    </span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Tambah Merchant</a>
+                    <a class="dropdown-item" href="#">Penukaran Poin</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="konversipoin.php">
+                    <i class="fas fa-coins"></i>
+                    Konversi Poin
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="accounts.php">
+                    <i class="far fa-user"></i>
+                    Profil
+                </a>
+            </li>
+
+        </ul>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link d-block" href="login.php">
+                    Admin, <b>Logout</b>
+                </a>
+            </li>
+        </ul>
     </div>
-  </li>
-  <li>
-    <div class="slider-img-3">
-     <div class="slider_banner_info">
-      <div class="text">
-        <h3 class="word wisteria">Sistem Informasi dan Pembayaran Elektronik Bank Sampah</h3>
-      </div>
-    </div>
-  </div>
-</li>
-</ul>
 </div>
+
+</nav>
+<div class="container">
+    <br>
+    <!-- row -->
+    <div class="row tm-content-row">
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+            <div class="tm-bg-primary-dark tm-block">
+                <center><h2 class="tm-block-title">Sampah Plastik</h2>
+                    <img src="img/b1.jpg" height="230" width="450"></center>
+                    <!-- <canvas id="lineChart"></canvas> -->
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                <div class="tm-bg-primary-dark tm-block">
+                    <center><h2 class="tm-block-title">Sampah Kertas</h2>
+                        <img src="img/b2.jpg" height="230" width="450"></center>
+                        <!-- <canvas id="barChart"></canvas> -->
+                    </div>
+                </div>
+                <div class="col-12 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
+                        <h2 class="tm-block-title">Orders List</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ORDER NO.</th>
+                                    <th scope="col">STATUS</th>
+                                    <th scope="col">OPERATORS</th>
+                                    <th scope="col">LOCATION</th>
+                                    <th scope="col">DISTANCE</th>
+                                    <th scope="col">START DATE</th>
+                                    <th scope="col">EST DELIVERY DUE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><b>#122349</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>Oliver Trag</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>485 km</b></td>
+                                    <td>16:00, 12 NOV 2018</td>
+                                    <td>08:00, 18 NOV 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122348</b></th>
+                                    <td>
+                                        <div class="tm-status-circle pending">
+                                        </div>Pending
+                                    </td>
+                                    <td><b>Jacob Miller</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>360 km</b></td>
+                                    <td>11:00, 10 NOV 2018</td>
+                                    <td>04:00, 14 NOV 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122347</b></th>
+                                    <td>
+                                        <div class="tm-status-circle cancelled">
+                                        </div>Cancelled
+                                    </td>
+                                    <td><b>George Wilson</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>340 km</b></td>
+                                    <td>12:00, 22 NOV 2018</td>
+                                    <td>06:00, 28 NOV 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122346</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>William Aung</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>218 km</b></td>
+                                    <td>15:00, 10 NOV 2018</td>
+                                    <td>09:00, 14 NOV 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122345</b></th>
+                                    <td>
+                                        <div class="tm-status-circle pending">
+                                        </div>Pending
+                                    </td>
+                                    <td><b>Harry Ryan</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>280 km</b></td>
+                                    <td>15:00, 11 NOV 2018</td>
+                                    <td>09:00, 17 NOV 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122344</b></th>
+                                    <td>
+                                        <div class="tm-status-circle pending">
+                                        </div>Pending
+                                    </td>
+                                    <td><b>Michael Jones</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>218 km</b></td>
+                                    <td>18:00, 12 OCT 2018</td>
+                                    <td>06:00, 18 OCT 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122343</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>Timmy Davis</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>218 km</b></td>
+                                    <td>12:00, 10 OCT 2018</td>
+                                    <td>08:00, 18 OCT 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122342</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>Oscar Phyo</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>420 km</b></td>
+                                    <td>15:30, 06 OCT 2018</td>
+                                    <td>09:30, 16 OCT 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122341</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>Charlie Brown</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>300 km</b></td>
+                                    <td>11:00, 10 OCT 2018</td>
+                                    <td>03:00, 14 OCT 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122340</b></th>
+                                    <td>
+                                        <div class="tm-status-circle cancelled">
+                                        </div>Cancelled
+                                    </td>
+                                    <td><b>Wilson Cookies</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>218 km</b></td>
+                                    <td>17:30, 12 OCT 2018</td>
+                                    <td>08:30, 22 OCT 2018</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><b>#122339</b></th>
+                                    <td>
+                                        <div class="tm-status-circle moving">
+                                        </div>Moving
+                                    </td>
+                                    <td><b>Richard Clamon</b></td>
+                                    <td><b>London, UK</b></td>
+                                    <td><b>150 km</b></td>
+                                    <td>15:00, 12 OCT 2018</td>
+                                    <td>09:20, 26 OCT 2018</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="tm-footer row tm-mt-small">
+            <div class="col-12 font-weight-light">
+              <p class="text-center text-white mb-0 px-4 small">
+                Copyright &copy; <b>2020</b> | Berliana - Ilmiyatus
+            </p>
+        </div>
+    </footer>
 </div>
-</div>
-<!-- //banner-slider -->
-</header>
 
-
-
-<?php
-include "footerend.php";
-?>
-
-<script  src="js/jquery.min.v3.js"></script>
-<script  src="js/bootstrap.min.js"></script>
-<script  src="js/move-top.js"></script>
-<script  src="js/easing.js"></script>
-<script  src="js/SmoothScroll.min.js"></script> 
-
-<!-- banner Slider -->
-<script src="js/responsiveslides.min.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<!-- https://jquery.com/download/ -->
+<script src="js/moment.min.js"></script>
+<!-- https://momentjs.com/ -->
+<script src="js/Chart.min.js"></script>
+<!-- http://www.chartjs.org/docs/latest/ -->
+<script src="js/bootstrap.min.js"></script>
+<!-- https://getbootstrap.com/ -->
+<script src="js/tooplate-scripts.js"></script>
 <script>
-    // You can also use "$(window).load(function() {"
-    $(function () {
-      // Slideshow 4
-      $("#slider3").responsiveSlides({
-        auto: true,
-        pager: true,
-        nav: false,
-        speed: 500,
-        namespace: "callbacks",
-        before: function () {
-          $('.events').append("<li>before event fired.</li>");
-        },
-        after: function () {
-          $('.events').append("<li>after event fired.</li>");
-        }
-      });
+    Chart.defaults.global.defaultFontColor = 'white';
+    let ctxLine,
+    ctxBar,
+    ctxPie,
+    optionsLine,
+    optionsBar,
+    optionsPie,
+    configLine,
+    configBar,
+    configPie,
+    lineChart;
+    barChart, pieChart;
+        // DOM is ready
+        $(function () {
+            drawLineChart(); // Line Chart
+            drawBarChart(); // Bar Chart
+            drawPieChart(); // Pie Chart
 
-    });
-  </script>
-  <!-- //banner Slider -->
-
-
-  <script src="js/easy-responsive-tabs.js"></script>
-  <script>
-    $(document).ready(function () {
-      $('#horizontalTab').easyResponsiveTabs({
-type: 'default', //Types: default, vertical, accordion           
-width: 'auto', //auto or any width like 600px
-fit: true,   // 100% fit in a container
-closed: 'accordion', // Start closed if in accordion view
-activate: function(event) { // Callback function if tab is switched
-  var $tab = $(this);
-  var $info = $('#tabInfo');
-  var $name = $('span', $info);
-  $name.text($tab.text());
-  $info.show();
-}
-});
-      $('#verticalTab').easyResponsiveTabs({
-        type: 'vertical',
-        width: 'auto',
-        fit: true
-      });
-    });
-  </script>
-  <!--//tabs-->
-  <!--team-->
-  <script type="text/javascript">
-   $(window).load(function() {
-    $("#flexiselDemo1").flexisel({
-     visibleItems:4,
-     animationSpeed: 1000,
-     autoPlay: true,
-     autoPlaySpeed: 3000,       
-     pauseOnHover: true,
-     enableResponsiveBreakpoints: true,
-     responsiveBreakpoints: { 
-      portrait: { 
-       changePoint:480,
-       visibleItems: 1
-     }, 
-     landscape: { 
-       changePoint:640,
-       visibleItems:2
-     },
-     tablet: { 
-       changePoint:768,
-       visibleItems: 3
-     }
-   }
- });
-
-  });
-</script>
-<script type="text/javascript" src="js/jquery.flexisel.js"></script>
-
-<!--team-->
-<script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
-<script>
-  $(document).ready(function() {
-    $('.popup-with-zoom-anim').magnificPopup({
-     type: 'inline',
-     fixedContentPos: false,
-     fixedBgPos: true,
-     overflowY: 'auto',
-     closeBtnInside: true,
-     preloader: false,
-     midClick: true,
-     removalDelay: 300,
-     mainClass: 'my-mfp-zoom-in'
-   });
-
-  });
-</script>
-<script type="text/javascript">
-  var words = document.getElementsByClassName('word');
-  var wordArray = [];
-  var currentWord = 0;
-
-  words[currentWord].style.opacity = 1;
-  for (var i = 0; i < words.length; i++) {
-    splitLetters(words[i]);
-  }
-
-  function changeWord() {
-    var cw = wordArray[currentWord];
-    var nw = currentWord == words.length-1 ? wordArray[0] : wordArray[currentWord+1];
-    for (var i = 0; i < cw.length; i++) {
-      animateLetterOut(cw, i);
-    }
-
-    for (var i = 0; i < nw.length; i++) {
-      nw[i].className = 'letter behind';
-      nw[0].parentElement.style.opacity = 1;
-      animateLetterIn(nw, i);
-    }
-
-    currentWord = (currentWord == wordArray.length-1) ? 0 : currentWord+1;
-  }
-
-  function animateLetterOut(cw, i) {
-    setTimeout(function() {
-      cw[i].className = 'letter out';
-    }, i*80);
-  }
-
-  function animateLetterIn(nw, i) {
-    setTimeout(function() {
-      nw[i].className = 'letter in';
-    }, 340+(i*80));
-  }
-
-  function splitLetters(word) {
-    var content = word.innerHTML;
-    word.innerHTML = '';
-    var letters = [];
-    for (var i = 0; i < content.length; i++) {
-      var letter = document.createElement('span');
-      letter.className = 'letter';
-      letter.innerHTML = content.charAt(i);
-      word.appendChild(letter);
-      letters.push(letter);
-    }
-
-    wordArray.push(letters);
-  }
-
-  changeWord();
-  setInterval(changeWord, 4000);
-
-</script> 
-
-<script type="text/javascript">
- var slideIndex = 1;
- showSlides(slideIndex);
-
- function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1} 
-    if (n < 1) {slideIndex = slides.length}
-      for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none"; 
-      }
-      for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-      }
-      slides[slideIndex-1].style.display = "block"; 
-      dots[slideIndex-1].className += " active";
-    } 
-  </script>
-  <!-- start-smoth-scrolling -->
-  <!-- here stars scrolling icon -->
-  <script type="text/javascript">
-    $(document).ready(function() {
-      /*
-        var defaults = {
-        containerID: 'toTop', // fading element id
-        containerHoverID: 'toTopHover', // fading element hover id
-        scrollSpeed: 1200,
-        easingType: 'linear' 
-        };
-       */
-
-       $().UItoTop({ easingType: 'easeOutQuart' });
-
-     });
-   </script>
-   <!-- //here ends scrolling icon -->
-   <!-- scrolling script -->
-   <script type="text/javascript">
-     jQuery(document).ready(function($) {
-      $(".scroll").click(function(event){   
-       event.preventDefault();
-       $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-     });
-    });
-  </script> 
-  <script type="text/javascript">
-   $(function () {
-    $('[data-toggle="popover"]').popover()
-  })
-</script> 
-<!-- //scrolling script -->
-<!--//start-smoth-scrolling -->
+            $(window).resize(function () {
+                updateLineChart();
+                updateBarChart();                
+            });
+        })
+    </script>
 </body>
+
 </html>
