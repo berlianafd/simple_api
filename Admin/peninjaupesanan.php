@@ -1,4 +1,18 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+    ob_start();
+}
+
+@ini_set('output_buffering',0);
+set_time_limit(0);
+error_reporting(0);
+
+    if (!isset($_SESSION['password']) || !isset($_SESSION['username'])) {     
+        session_unset();
+        header("Location:login.php");
+        exit;
+    }
 require_once 'koneksi.php';
 
 $query = mysqli_query($koneksi,"SELECT * FROM konversi_poin ORDER BY id");
@@ -34,7 +48,7 @@ $no=1;
   <div class="" id="home">
     <nav class="navbar navbar-expand-xl">
       <div class="container h-100">
-        <a class="navbar-brand" href="index.php">
+        <a class="navbar-brand" href="index-admin.php">
           <h1 class="tm-site-title mb-0">POLINEMA-PAY</h1>
         </a>
         <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -45,7 +59,7 @@ $no=1;
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mx-auto h-100">
           <li class="nav-item">
-            <a class="nav-link" href="index.php">
+            <a class="nav-link" href="index-admin.php">
               <i class="fas fa-home"></i>
               Dashboard
               <span class="sr-only">(current)</span>
@@ -93,7 +107,7 @@ $no=1;
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link d-block" href="login.php">
+        <a class="nav-link d-block" href="logout.php">
           Admin, <b>Logout</b>
         </a>
       </li>
