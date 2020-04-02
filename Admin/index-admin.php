@@ -1,4 +1,18 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+    ob_start();
+}
+
+@ini_set('output_buffering',0);
+set_time_limit(0);
+error_reporting(0);
+
+    if (!isset($_SESSION['password']) || !isset($_SESSION['username'])) {     
+        session_unset();
+        header("Location:login.php");
+        exit;
+    }
 require_once 'koneksi.php';
 ?>
 
@@ -86,7 +100,7 @@ require_once 'koneksi.php';
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link d-block" href="login.php">
+                <a class="nav-link d-block" href="logout.php">
                     Admin, <b>Logout</b>
                 </a>
             </li>
