@@ -39,8 +39,8 @@ $no=1;
   <!-- https://getbootstrap.com/ -->
   <link rel="stylesheet" href="css/templatemo-style.css">
     <!--
-	Product Admin CSS Template
-	https://templatemo.com/tm-524-product-admin
+  Product Admin CSS Template
+  https://templatemo.com/tm-524-product-admin
 -->
 </head>
 
@@ -87,8 +87,8 @@ $no=1;
           </span>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Tambah Merchant</a>
-          <a class="dropdown-item" href="#">Penukaran Poin</a>
+          <a class="dropdown-item" href="tambah-merchant.php">Tambah Merchant</a>
+          <a class="dropdown-item" href="penukaranpoin-merchant.php">Penukaran Poin</a>
         </div>
       </li>
       <li class="nav-item">
@@ -177,17 +177,28 @@ $no=1;
                 <td><p><?php echo $menu['waktu'];?></p></td>
                 <td><p><?php echo $menu['perkiraanBeratSampah'];?></p></td>
                 <td><p><?php echo "<img src='gambar/$menu[image_name]'width='50' height='50'/>";?></p></td>
+                <?php  
+                  $pilih_status   = array(
+                    array(
+                      'label'             => 'Terima',
+                      'value'             => 'terima',
+                    ),
+                    array(
+                      'label'             => 'Tolak',
+                      'value'             => 'tolak',
+                    )
+                  );
+                ?>
                 <td><p><?php echo $menu['Status'];?></p></td>           
                 <td>
-                  <select class="" onchange="status(<?php echo $menu['id'] ?>)" 
-                    id="<?php echo 'Status' . $menu['id'] ?>"style="width: auto;">
-                    <option value="terima">Terima</option>
-                    <option value="tolak">Tolak</option>
-                    <?php foreach ($pilih_status as $Status): 
-                      $selected   = ( $menu['Status'] == $Status['value'] )? 'selected' : false;
+                  <select class="badge" onchange="status(<?php echo $menu['id'] ?>)" 
+                    id="<?php echo 'aksistatus' . $menu['id'] ?>"style="width: 70%">
+                    <option selected disabled>Pilih Status</option>
+                    <?php foreach ($pilih_status as $anuuuuu): 
+                      $selected   = ( $menu['Status'] == $anuuuuu['value'] )? 'selected' : false;
                       ?>
-                      <option value="<?php echo $Status['value'] ?>" 
-                        <?php echo $selected ?>><?php echo $Status['label'] ?>
+                      <option value="<?php echo $anuuuuu['value'] ?>" 
+                        <?php echo $selected ?>><?php echo $anuuuuu['label'] ?>
                       </option>
                     <?php endforeach; ?>
                   </select>
@@ -217,5 +228,36 @@ $no=1;
 <!-- https://jquery.com/download/ -->
 <script src="js/bootstrap.min.js"></script>
 <!-- https://getbootstrap.com/ -->
+
+<script type="text/javascript">
+    function status (id){
+      var aksi = $('#aksistatus' + id ).val();  
+      $.ajax({
+        url: 'status-peninjaupesanan.php',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            value: aksi,
+            id: id
+        },
+      })
+      .done(function() {
+        console.log("success");
+      })
+      .fail(function() {
+        console.log("error");
+      });
+      
+    }
+
+
+
+    jQuery(document).ready(function($) {
+      $(".scroll").click(function(event){   
+        event.preventDefault();
+        $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+      });
+    });
+  </script>
 </body>
 </html>
