@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2020 at 05:49 AM
+-- Generation Time: Apr 09, 2020 at 08:08 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -46,41 +46,23 @@ INSERT INTO `admin` (`id_user`, `username`, `password`, `notelp`, `foto`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hargasampah`
+-- Table structure for table `konversiharga`
 --
 
-CREATE TABLE `hargasampah` (
-  `id_sampah` int(11) NOT NULL,
-  `namaSampah` varchar(10) NOT NULL,
-  `hargaSampah` int(11) NOT NULL
+CREATE TABLE `konversiharga` (
+  `id_jenis` int(11) NOT NULL,
+  `nama_jenis` varchar(10) NOT NULL,
+  `harga` float NOT NULL,
+  `poin` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `hargasampah`
+-- Dumping data for table `konversiharga`
 --
 
-INSERT INTO `hargasampah` (`id_sampah`, `namaSampah`, `hargaSampah`) VALUES
-(1, 'kertas', 4000),
-(2, 'plastik', 5000);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `konversi_poin`
---
-
-CREATE TABLE `konversi_poin` (
-  `id` int(11) NOT NULL,
-  `poin` int(11) NOT NULL,
-  `harga` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `konversi_poin`
---
-
-INSERT INTO `konversi_poin` (`id`, `poin`, `harga`) VALUES
-(1, 1, 1);
+INSERT INTO `konversiharga` (`id_jenis`, `nama_jenis`, `harga`, `poin`) VALUES
+(1, 'kertas', 4000, 4000),
+(2, 'plastik', 5000, 5000);
 
 -- --------------------------------------------------------
 
@@ -110,9 +92,9 @@ CREATE TABLE `permintaanjemputsampah` (
 --
 
 INSERT INTO `permintaanjemputsampah` (`id`, `idUser`, `namaAcara`, `notelp`, `alamat`, `kecamatan`, `kelurahan`, `tanggal`, `waktu`, `perkiraanBeratSampah`, `image_path`, `image_name`, `Status`, `created_at`) VALUES
-(1, 2, 'semnas', '085790737556', 'jalans uhat', 'Lowokwaru', 'Jatimulyo', '2020-03-24', '17:22:00', 6, 'http://192.168.43.10:8080/simple_api/upload/DokumenPenunjang/2_2020-03-24_semnas.jpg', '2_2020-03-24_semnas', 'Pending', '2020-03-23'),
-(2, 2, 'gogo', '085123144213', 'jalan senggani', 'Lowokwaru', 'Jatimulyo', '2020-03-26', '17:28:00', 6, 'http://192.168.43.10:8080/simple_api/upload/DokumenPenunjang/2_2020-03-26_gogo.jpg', '2_2020-03-26_gogo', 'Pending', '2020-03-23'),
-(3, 2, 'Promnight HMTI', '085132456121', 'jalan soekarno', 'Kedungkandang', 'Arjowinangun', '2020-03-25', '23:21:00', 9, 'http://192.168.43.10:8080/simple_api/upload/DokumenPenunjang/2_2020-03-25_Promnight HMTI.jpg', '2_2020-03-25_Promnight HMTI', 'Pending', '2020-03-23');
+(1, 2, 'Seminar Nasional HMA', '085790737556', 'Polinema. Gedung Aula Pertamina', 'Lowokwaru', 'Jatimulyo', '2020-03-24', '17:22:00', 6, 'http://192.168.43.10:8080/simple_api/upload/DokumenPenunjang/2_2020-03-24_semnas.jpg', '2_2020-03-24_semnas', 'terima', '2020-03-23'),
+(2, 2, 'Seminar Nasional HME', '085123144213', 'Polinema. Aula Pertamina', 'Lowokwaru', 'Jatimulyo', '2020-03-26', '17:28:00', 6, 'http://192.168.43.10:8080/simple_api/upload/DokumenPenunjang/2_2020-03-26_gogo.jpg', '2_2020-03-26_gogo', 'terima', '2020-03-23'),
+(3, 2, 'Promnight HMTI', '085132456121', 'jalan soekarno', 'Kedungkandang', 'Arjowinangun', '2020-03-25', '23:21:00', 9, 'http://192.168.43.10:8080/simple_api/upload/DokumenPenunjang/2_2020-03-25_Promnight HMTI.jpg', '2_2020-03-25_Promnight HMTI', 'tolak', '2020-03-23');
 
 -- --------------------------------------------------------
 
@@ -133,7 +115,7 @@ CREATE TABLE `totalpoinuser` (
 --
 
 INSERT INTO `totalpoinuser` (`idUser`, `totalBeratSampah`, `totalBeratKertas`, `totalBeratPlastik`, `totalPoin`) VALUES
-(2, 961, 841, 120, 1061),
+(2, 990, 862, 128, 1090),
 (3, 150, 0, 0, 0);
 
 -- --------------------------------------------------------
@@ -186,11 +168,8 @@ INSERT INTO `transaksisampah` (`idTransaksi`, `idUser`, `noMesin`, `jenisSampah`
 (59, 2, 1, 1, 100, '2020-03-11'),
 (60, 2, 1, 1, 8, '2020-03-12'),
 (61, 2, 1, 1, 111, '2020-03-16'),
-(62, 5, 1, 1, 10, '2020-03-31'),
-(63, 5, 1, 1, 100, '2020-03-31'),
-(64, 5, 1, 1, 100, '2020-03-31'),
-(65, 5, 1, 1, 100, '2020-03-31'),
-(66, 5, 1, 2, 100, '2020-03-31');
+(62, 2, 1, 1, 21, '2020-03-31'),
+(63, 2, 1, 2, 8, '2020-03-31');
 
 -- --------------------------------------------------------
 
@@ -205,6 +184,33 @@ CREATE TABLE `transaksitukarpoin` (
   `poin` int(11) NOT NULL,
   `created_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `transaksitukarpoin`
+--
+
+INSERT INTO `transaksitukarpoin` (`idTukarPoin`, `idUser`, `idPenjual`, `poin`, `created_at`) VALUES
+(1, 2, 3, 20, '2020-03-31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tugasjemputsampah`
+--
+
+CREATE TABLE `tugasjemputsampah` (
+  `id` int(11) NOT NULL,
+  `idJemput` int(11) NOT NULL,
+  `idSukarelawan` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tugasjemputsampah`
+--
+
+INSERT INTO `tugasjemputsampah` (`id`, `idJemput`, `idSukarelawan`) VALUES
+(1, 1, 3),
+(2, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -230,9 +236,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `unique_id`, `level`, `name`, `nohp`, `encrypted_imei`, `salt`, `created_at`, `updated_at`) VALUES
 (2, '5e5751069b4f11.96505932', 'User', 'Berliana Farah Diba', '+6285790737556', 'aRl8Kx0f3NDQqCBJiZISfzAkhIMyOWUyZTg5Y2Vm', '29e2e89cef', '2020-02-27 12:17:58', NULL),
-(3, '5e5bd50eb32916.06646042', 'Merchant', 'Nina', '+6289656964705', 'J8tX3Q1SMpl9bNWeIN9xsNcBm4EyZGQ3ODI4ZDgx', '2dd7828d81', '2020-03-01 22:30:22', NULL),
-(4, '5e67cefaee8800.78492478', '1', '2', '1', '27tTNsl2ew8CxCgg7xTP4FGVXdMxZDMyOWZlODU5', '1d329fe859', '2020-03-11 00:31:39', NULL),
-(5, '5e8229a7822989.77682381', 'User', 'Ilmi', '+6282245927609', 'NBRTs/YjM9JziLkv6DfQqxz27eszOTI4MGM3NjBj', '39280c760c', '2020-03-31 00:17:27', NULL);
+(3, '5e5bd50eb32916.06646042', 'Sukarelawan', 'Nina', '+6289656964705', 'J8tX3Q1SMpl9bNWeIN9xsNcBm4EyZGQ3ODI4ZDgx', '2dd7828d81', '2020-03-01 22:30:22', NULL),
+(4, '5e67cefaee8800.78492478', '1', '2', '1', '27tTNsl2ew8CxCgg7xTP4FGVXdMxZDMyOWZlODU5', '1d329fe859', '2020-03-11 00:31:39', NULL);
 
 --
 -- Indexes for dumped tables
@@ -245,16 +250,10 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- Indexes for table `hargasampah`
+-- Indexes for table `konversiharga`
 --
-ALTER TABLE `hargasampah`
-  ADD PRIMARY KEY (`id_sampah`);
-
---
--- Indexes for table `konversi_poin`
---
-ALTER TABLE `konversi_poin`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `konversiharga`
+  ADD PRIMARY KEY (`id_jenis`);
 
 --
 -- Indexes for table `permintaanjemputsampah`
@@ -284,6 +283,14 @@ ALTER TABLE `transaksitukarpoin`
   ADD KEY `idUser` (`idUser`);
 
 --
+-- Indexes for table `tugasjemputsampah`
+--
+ALTER TABLE `tugasjemputsampah`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idJemput` (`idJemput`),
+  ADD KEY `idSukarelawan` (`idSukarelawan`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -302,18 +309,6 @@ ALTER TABLE `admin`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `hargasampah`
---
-ALTER TABLE `hargasampah`
-  MODIFY `id_sampah` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `konversi_poin`
---
-ALTER TABLE `konversi_poin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT for table `permintaanjemputsampah`
 --
 ALTER TABLE `permintaanjemputsampah`
@@ -323,19 +318,25 @@ ALTER TABLE `permintaanjemputsampah`
 -- AUTO_INCREMENT for table `transaksisampah`
 --
 ALTER TABLE `transaksisampah`
-  MODIFY `idTransaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `idTransaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `transaksitukarpoin`
 --
 ALTER TABLE `transaksitukarpoin`
-  MODIFY `idTukarPoin` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idTukarPoin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tugasjemputsampah`
+--
+ALTER TABLE `tugasjemputsampah`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
@@ -364,6 +365,13 @@ ALTER TABLE `transaksisampah`
 --
 ALTER TABLE `transaksitukarpoin`
   ADD CONSTRAINT `transaksitukarpoin_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tugasjemputsampah`
+--
+ALTER TABLE `tugasjemputsampah`
+  ADD CONSTRAINT `tugasjemputsampah_ibfk_1` FOREIGN KEY (`idJemput`) REFERENCES `permintaanjemputsampah` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tugasjemputsampah_ibfk_2` FOREIGN KEY (`idSukarelawan`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
