@@ -8,11 +8,11 @@ if (!isset($_SESSION)) {
 set_time_limit(0);
 error_reporting(0);
 
-    if (!isset($_SESSION['password']) || !isset($_SESSION['username'])) {     
-        session_unset();
-        header("Location:login.php");
-        exit;
-    }
+if (!isset($_SESSION['password']) || !isset($_SESSION['username'])) {     
+    session_unset();
+    header("Location:login.php");
+    exit;
+}
 require_once 'koneksi.php';
 ?>
 
@@ -52,266 +52,108 @@ require_once 'koneksi.php';
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto h-100">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
+                        <a class="nav-link active" href="index-admin.php">
                             <i class="fas fa-home"></i>
                             Dashboard
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-users"></i>
-                        <span>
-                            User Mahasiswa <i class="fas fa-angle-down"></i>
-                        </span>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="peninjaupesanan.php">Peninjau Pesanan</a>
-                        <a class="dropdown-item" href="hargasampah.php">Harga Sampah</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-store"></i>
-                    <span>
-                        Merchant<i class="fas fa-angle-down"></i>
-                    </span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Tambah Merchant</a>
-                    <a class="dropdown-item" href="#">Penukaran Poin</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="konversipoin.php">
-                    <i class="fas fa-coins"></i>
-                    Konversi Poin
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="accounts.php">
-                    <i class="far fa-user"></i>
-                    Profil
-                </a>
-            </li>
 
-        </ul>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link d-block" href="logout.php">
-                    Admin, <b>Logout</b>
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
+                    <li class="nav-item">
+                        <a class="nav-link" href="peninjaupesanan.php">
+                            <i class="fas fa-clipboard-list"></i>
+                            Pesanan
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="konversiharga.php">
+                            <i class="fas fa-money-check-alt"></i>
+                            Konversi Harga
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="riwayat.php">
+                            <i class="fas fa-history"></i>
+                            Riwayat
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="accounts.php">
+                            <i class="far fa-user"></i>
+                            Profil
+                        </a>
+                    </li>
 
-</nav>
-<div class="container">
-    <br>
-    <!-- row -->
-    <div class="row tm-content-row">
-        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-            <div class="tm-bg-primary-dark tm-block">
-                <center><h2 class="tm-block-title">Sampah Plastik</h2>
-                    <img src="img/b1.jpg" height="230" width="450"></center>
-                    <!-- <canvas id="lineChart"></canvas> -->
-                </div>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link d-block" href="logout.php">
+                            Admin, <b>Logout</b>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+        </div>
+
+    </nav>
+    <div class="container">
+        <br><br>
+        <!-- row -->
+        <div class="row tm-content-row">
+            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
                 <div class="tm-bg-primary-dark tm-block">
-                    <center><h2 class="tm-block-title">Sampah Kertas</h2>
-                        <img src="img/b2.jpg" height="230" width="450"></center>
-                        <!-- <canvas id="barChart"></canvas> -->
+                    <a href="user-mahasiswa.php"><h2 align="center" class="tm-block-title">User Mahasiswa</h2>
+                        <center><img src="img/1.png" height="200" width="220"></center></a>
+                        <!-- <canvas id="lineChart"></canvas> -->
                     </div>
                 </div>
-                <div class="col-12 tm-block-col">
-                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
-                        <h2 class="tm-block-title">Orders List</h2>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ORDER NO.</th>
-                                    <th scope="col">STATUS</th>
-                                    <th scope="col">OPERATORS</th>
-                                    <th scope="col">LOCATION</th>
-                                    <th scope="col">DISTANCE</th>
-                                    <th scope="col">START DATE</th>
-                                    <th scope="col">EST DELIVERY DUE</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row"><b>#122349</b></th>
-                                    <td>
-                                        <div class="tm-status-circle moving">
-                                        </div>Moving
-                                    </td>
-                                    <td><b>Oliver Trag</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>485 km</b></td>
-                                    <td>16:00, 12 NOV 2018</td>
-                                    <td>08:00, 18 NOV 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122348</b></th>
-                                    <td>
-                                        <div class="tm-status-circle pending">
-                                        </div>Pending
-                                    </td>
-                                    <td><b>Jacob Miller</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>360 km</b></td>
-                                    <td>11:00, 10 NOV 2018</td>
-                                    <td>04:00, 14 NOV 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122347</b></th>
-                                    <td>
-                                        <div class="tm-status-circle cancelled">
-                                        </div>Cancelled
-                                    </td>
-                                    <td><b>George Wilson</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>340 km</b></td>
-                                    <td>12:00, 22 NOV 2018</td>
-                                    <td>06:00, 28 NOV 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122346</b></th>
-                                    <td>
-                                        <div class="tm-status-circle moving">
-                                        </div>Moving
-                                    </td>
-                                    <td><b>William Aung</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>218 km</b></td>
-                                    <td>15:00, 10 NOV 2018</td>
-                                    <td>09:00, 14 NOV 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122345</b></th>
-                                    <td>
-                                        <div class="tm-status-circle pending">
-                                        </div>Pending
-                                    </td>
-                                    <td><b>Harry Ryan</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>280 km</b></td>
-                                    <td>15:00, 11 NOV 2018</td>
-                                    <td>09:00, 17 NOV 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122344</b></th>
-                                    <td>
-                                        <div class="tm-status-circle pending">
-                                        </div>Pending
-                                    </td>
-                                    <td><b>Michael Jones</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>218 km</b></td>
-                                    <td>18:00, 12 OCT 2018</td>
-                                    <td>06:00, 18 OCT 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122343</b></th>
-                                    <td>
-                                        <div class="tm-status-circle moving">
-                                        </div>Moving
-                                    </td>
-                                    <td><b>Timmy Davis</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>218 km</b></td>
-                                    <td>12:00, 10 OCT 2018</td>
-                                    <td>08:00, 18 OCT 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122342</b></th>
-                                    <td>
-                                        <div class="tm-status-circle moving">
-                                        </div>Moving
-                                    </td>
-                                    <td><b>Oscar Phyo</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>420 km</b></td>
-                                    <td>15:30, 06 OCT 2018</td>
-                                    <td>09:30, 16 OCT 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122341</b></th>
-                                    <td>
-                                        <div class="tm-status-circle moving">
-                                        </div>Moving
-                                    </td>
-                                    <td><b>Charlie Brown</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>300 km</b></td>
-                                    <td>11:00, 10 OCT 2018</td>
-                                    <td>03:00, 14 OCT 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122340</b></th>
-                                    <td>
-                                        <div class="tm-status-circle cancelled">
-                                        </div>Cancelled
-                                    </td>
-                                    <td><b>Wilson Cookies</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>218 km</b></td>
-                                    <td>17:30, 12 OCT 2018</td>
-                                    <td>08:30, 22 OCT 2018</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"><b>#122339</b></th>
-                                    <td>
-                                        <div class="tm-status-circle moving">
-                                        </div>Moving
-                                    </td>
-                                    <td><b>Richard Clamon</b></td>
-                                    <td><b>London, UK</b></td>
-                                    <td><b>150 km</b></td>
-                                    <td>15:00, 12 OCT 2018</td>
-                                    <td>09:20, 26 OCT 2018</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
+                    <div class="tm-bg-primary-dark tm-block">
+                        <a href="user-relawan.php"><h2 align="center" class="tm-block-title">User Relawan</h2>
+                            <center><img src="img/2.png" height="200" width="220"></center></a>
+                            <!-- <canvas id="barChart"></canvas> -->
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
+                        <div class="tm-bg-primary-dark tm-block">
+                            <a href="user-merchant.php"><h2 align="center" class="tm-block-title">User Merchant</h2>
+                                <center><img src="img/3.png" height="200" width="220"></center></a>
+                                <!-- <canvas id="barChart"></canvas> -->
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+                <footer class="tm-footer row tm-mt-small">
+                    <div class="col-12 font-weight-light">
+                      <p class="text-center text-white mb-0 px-4 small">
+                        Copyright &copy; <b>2020</b> | Berliana - Ilmiyatus
+                    </p>
+                </div>
+            </footer>
         </div>
-        <footer class="tm-footer row tm-mt-small">
-            <div class="col-12 font-weight-light">
-              <p class="text-center text-white mb-0 px-4 small">
-                Copyright &copy; <b>2020</b> | Berliana - Ilmiyatus
-            </p>
-        </div>
-    </footer>
-</div>
 
-<script src="js/jquery-3.3.1.min.js"></script>
-<!-- https://jquery.com/download/ -->
-<script src="js/moment.min.js"></script>
-<!-- https://momentjs.com/ -->
-<script src="js/Chart.min.js"></script>
-<!-- http://www.chartjs.org/docs/latest/ -->
-<script src="js/bootstrap.min.js"></script>
-<!-- https://getbootstrap.com/ -->
-<script src="js/tooplate-scripts.js"></script>
-<script>
-    Chart.defaults.global.defaultFontColor = 'white';
-    let ctxLine,
-    ctxBar,
-    ctxPie,
-    optionsLine,
-    optionsBar,
-    optionsPie,
-    configLine,
-    configBar,
-    configPie,
-    lineChart;
-    barChart, pieChart;
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <!-- https://jquery.com/download/ -->
+        <script src="js/moment.min.js"></script>
+        <!-- https://momentjs.com/ -->
+        <script src="js/Chart.min.js"></script>
+        <!-- http://www.chartjs.org/docs/latest/ -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- https://getbootstrap.com/ -->
+        <script src="js/tooplate-scripts.js"></script>
+        <script>
+            Chart.defaults.global.defaultFontColor = 'white';
+            let ctxLine,
+            ctxBar,
+            ctxPie,
+            optionsLine,
+            optionsBar,
+            optionsPie,
+            configLine,
+            configBar,
+            configPie,
+            lineChart;
+            barChart, pieChart;
         // DOM is ready
         $(function () {
             drawLineChart(); // Line Chart
