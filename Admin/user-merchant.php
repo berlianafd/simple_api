@@ -104,7 +104,7 @@ require_once 'koneksi.php';
             <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
                 <a class="btn btn-light btn-sm " href="tambah-merchant.php" role="button">Tambah Merchant</a>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a class="btn btn-light btn-sm " href="penukaranpoin-merchant.php" role="button">Tukar Poin Merchant</a>
+                <a class="btn btn-light btn-sm " href="tukarpoin-merchant.php" role="button">Tukar Poin Merchant</a>
                 <br><br>
                 <h2 align="center" class="tm-block-title">Data Merchant</h2>
                 
