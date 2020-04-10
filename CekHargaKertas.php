@@ -7,28 +7,21 @@ $db = new DB_Functions();
 $response = array("error" => FALSE);
 
 // check for post data
-if (isset($_POST["nohp"]) && isset($_POST['name'])) {
-    $nohp = $_POST['nohp'];
+if (isset($_POST["id"])) {
+    $id = $_POST['id'];
 
 	// get the user poin
-    $user = $db->getUserId($nohp);
+    $user = $db->getHargaKertas($id);
 
     if ($user != false) {
         // use is found
         $response["error"] = FALSE;
-        $response["user"]["id"] = $user["id"];
-        $response["user"]["nama"] = $user["name"];
-        $response["user"]["nohp"] = $user["nohp"];
-        $path = $user["image_path"];
-        $basec = base64_encode(file_get_contents("$path"));
-        $response["user"]["image_path"] = $basec;        
-        $response["user"]["image_name"] = $user["image_name"];
-
+        $response["user"]["harga"] = $user["harga"];
         echo json_encode($response);
     } else {
         // user is not found with the credentials
         $response["error"] = TRUE;
-        $response["error_msg"] = "Akun tidak ditemukan!";
+        $response["error_msg"] = "Tidak ada data!";
         echo json_encode($response);
     }
     

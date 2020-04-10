@@ -32,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
        file_put_contents($ImagePath,base64_decode($ImageData));
 
-       echo "Data berhasil disimpan";
+       echo "Permintaan Jemput Sampah Diproses!";
    }
 
    mysqli_close($conn);

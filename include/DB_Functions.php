@@ -46,16 +46,58 @@ class DB_Functions {
         }
     }
 
-    public function storeTransactionBuang($idUser, $noMesin, $jenisSampah, $beratSampah) {
+    public function storeTransactionBuang($idUser, $noMesin, $jenisSampah, $beratSampah, $poinSampah) {
 
-        $stmt = $this->conn->prepare("INSERT INTO transaksisampah(idUser, noMesin, jenisSampah, beratSampah,created_at) VALUES(?, ?, ?, ?, NOW())");
-        $stmt->bind_param("ssss", $idUser, $noMesin, $jenisSampah, $beratSampah);
+        $stmt = $this->conn->prepare("INSERT INTO transaksisampah(idUser, noMesin, jenisSampah, beratSampah, poinSampah, created_at) VALUES(?, ?, ?, ?, ?, NOW())");
+        $stmt->bind_param("sssss", $idUser, $noMesin, $jenisSampah, $beratSampah, $poinSampah);
         $result = $stmt->execute();
         $stmt->close();
 
         // check for successful store
         if ($result) {
             $stmt = $this->conn->prepare("SELECT * FROM transaksisampah WHERE idUser = ?");
+            $stmt->bind_param("s", $idUser);
+            $stmt->execute();
+            $user = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+
+            return $user;
+        } else {
+            return false;
+        }
+    }
+
+    public function storeTransactionTukar($idUser, $idPenjual, $produk, $harga, $poin) {
+
+        $stmt = $this->conn->prepare("INSERT INTO transaksitukarpoin(idUser, idPenjual, produk, harga, poin, created_at) VALUES(?, ?, ?, ?, ?, NOW())");
+        $stmt->bind_param("sssss", $idUser, $idPenjual, $produk, $harga, $poin);
+        $result = $stmt->execute();
+        $stmt->close();
+
+        // check for successful store
+        if ($result) {
+            $stmt = $this->conn->prepare("SELECT * FROM transaksitukarpoin WHERE idUser = ?");
+            $stmt->bind_param("s", $idUser);
+            $stmt->execute();
+            $user = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+
+            return $user;
+        } else {
+            return false;
+        }
+    }
+
+    public function storeRiwayat($idUser, $fitur, $poinSampah) {
+
+        $stmt = $this->conn->prepare("INSERT INTO riwayat(idUser, fitur, poin, created_at) VALUES(?, ?, ?, NOW())");
+        $stmt->bind_param("sss", $idUser, $fitur, $poinSampah);
+        $result = $stmt->execute();
+        $stmt->close();
+
+        // check for successful store
+        if ($result) {
+            $stmt = $this->conn->prepare("SELECT * FROM riwayat WHERE idUser = ?");
             $stmt->bind_param("s", $idUser);
             $stmt->execute();
             $user = $stmt->get_result()->fetch_assoc();
@@ -88,19 +130,87 @@ class DB_Functions {
         }
     }
 
-    public function getTotalPoinUser($idUser) {
-        $stmt = $this->conn->prepare("SELECT * FROM totalpoinuser WHERE idUser = ?");
+    public function updateProfileName($idUser, $nama) {
+
+        $stmt = $this->conn->prepare("UPDATE user SET name=$nama WHERE id=$idUser");
+        // $stmt->bind_param();
+        $result = $stmt->execute();
+        $stmt->close();
+
+        // check for successful store
+        if ($result) {
+            $stmt = $this->conn->prepare("SELECT * FROM user WHERE id = ?");
             $stmt->bind_param("s", $idUser);
             $stmt->execute();
             $user = $stmt->get_result()->fetch_assoc();
             $stmt->close();
 
             return $user;
+        } else {
+            return false;
+        }
     }
 
+    public function storeTotalPoinUserTukar($idUser, $totalPoin) {
 
+        $stmt = $this->conn->prepare("UPDATE totalpoinuser SET totalPoin=$totalPoin WHERE idUser=$idUser");
+        // $stmt->bind_param("sssss", $totalBeratSampah, $totalBeratKertas, $totalBeratPlastik, $totalPoin, $id);
+        $result = $stmt->execute();
+        $stmt->close();
 
+        // check for successful store
+        if ($result) {
+            $stmt = $this->conn->prepare("SELECT * FROM totalpoinuser WHERE idUser = ?");
+            $stmt->bind_param("s", $idUser);
+            $stmt->execute();
+            $user = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
 
+            return $user;
+        } else {
+            return false;
+        }
+    }
+
+    public function getTotalPoinUser($idUser) {
+        $stmt = $this->conn->prepare("SELECT * FROM totalpoinuser WHERE idUser = ?");
+        $stmt->bind_param("s", $idUser);
+        $stmt->execute();
+        $user = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
+
+        return $user;
+    }
+
+    public function getHargaKertas($id) {
+        $stmt = $this->conn->prepare("SELECT * FROM konversiharga WHERE id = ?");
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $user = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
+
+        return $user;
+    }
+
+    public function getHargaPlastik($id) {
+        $stmt = $this->conn->prepare("SELECT * FROM konversiharga WHERE id = ?");
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $user = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
+
+        return $user;
+    }
+
+    public function getHargaPoin($id) {
+        $stmt = $this->conn->prepare("SELECT * FROM konversiharga WHERE id = ?");
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $user = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
+
+        return $user;
+    }
 
     /**
      * Get user by nohp and imei
@@ -132,10 +242,10 @@ class DB_Functions {
            //     $response["error_msg"] = "Perangkat berbeda. Yakin ingin meneruskan?"; //belum selesai
            //     echo json_encode($response);
            // }
-       } else {
-        return NULL;
+        } else {
+            return NULL;
+        }
     }
-}
 
 
     /**
