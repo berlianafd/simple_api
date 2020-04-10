@@ -1,6 +1,6 @@
 <?php
 if (!isset($_SESSION)) {
-    session_start();
+    session_start(); 
     ob_start();
 }
 
@@ -42,6 +42,7 @@ $notelp = $admin['notelp'];
   <link rel="stylesheet" href="css/bootstrap.min.css" />
   <!-- https://getbootstrap.com/ -->
   <link rel="stylesheet" href="css/templatemo-style.css">
+
     <!--
 	Product Admin CSS Template
 	https://templatemo.com/tm-524-product-admin
@@ -184,7 +185,8 @@ $notelp = $admin['notelp'];
     </div>
     <br><br><br>
     <div class="col-12">
-      <button type="" class="btn btn-primary btn-block text-uppercase">Tambah Admin</button>
+      <a class="btn btn-primary btn-block text-uppercase" href="tambah-admin.php">Tambah Admin</a>
+      <!-- <button type="" class="btn btn-primary btn-block text-uppercase">Tambah Admin</button> -->
     </div>
   </form>
 </div>
@@ -192,13 +194,15 @@ $notelp = $admin['notelp'];
 </div>
 </div>
 </div>
-<footer class="tm-footer row tm-mt-small">
+<!-- <div id="footer"> -->
+  <footer class="tm-footer row tm-mt-small">
   <div class="col-12 font-weight-light">
     <p class="text-center text-white mb-0 px-4 small">
       Copyright &copy; <b>2020</b> | Berliana - Ilmiyatus
     </p>
   </div>
 </footer>
+<!-- </div> -->
 </div>
 
 <script src="js/jquery-3.3.1.min.js"></script>
